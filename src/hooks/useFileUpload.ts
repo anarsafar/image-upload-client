@@ -15,7 +15,7 @@ const useFileUpload = () => {
     setStatus({});
     const formData = new FormData();
     formData.append('image', selectedFile);
-    await fetch('http://localhost:8080/images/upload', {
+    await fetch('https://image-upload-server-o9pj.onrender.com/images/upload', {
       method: 'POST',
       body: formData,
     })

@@ -14,20 +14,23 @@ function UIContainer(): JSX.Element {
   const { drop, borderStyle } = useDnD(handleFileChange);
 
   useEffect(() => {
-    if (status.error) {
+    if (status.error || status.message === 'Requested request not found') {
       toast({
         position: 'top-right',
         duration: 2000,
         isClosable: true,
         status: 'error',
-        description: status.error,
+        description: status.error ? status.error : 'Request not found',
       });
     }
-  }, [toast, status.error]);
+  }, [toast, status.error, status.message]);
 
   if (isLoading) return <Loading />;
 
-  if (status.message) return <Result file={file} status={status} />;
+  if (status.message && status.message !== 'Requested request not found') {
+    return <Result file={file} status={status} />;
+  }
+
   return (
     <Upload
       handleFileChange={handleFileChange}

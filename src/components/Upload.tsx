@@ -7,9 +7,15 @@ import useDnD from '../hooks/useDnD';
 import UploadContainer from './UploadContainer';
 
 function Upload(): JSX.Element {
-  const { handleFileChange } = useFileUpload();
+  const { handleFileChange, status, isLoading, file } = useFileUpload();
   const { fileInputRef, handleButtonClick } = useCustomRef();
-  const { drop, borderStyle } = useDnD();
+  const { drop, borderStyle } = useDnD(handleFileChange);
+
+  console.group('test');
+  console.log('Status ', status);
+  console.log('loading ', isLoading);
+  console.log('file ', file);
+  console.groupEnd();
 
   return (
     <UploadContainer>

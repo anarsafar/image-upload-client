@@ -20,10 +20,12 @@ const useFileUpload = () => {
       body: formData,
     })
       .then((res) => {
-        setLoading(false);
         return res.json();
       })
-      .then((data) => setStatus(data))
+      .then((data) => {
+        setLoading(false);
+        setStatus(data);
+      })
       .catch(() => {
         setLoading(false);
         setStatus({ error: 'Something went wrong' });
@@ -37,7 +39,7 @@ const useFileUpload = () => {
     }
   };
 
-  return { file, handleFileChange, status, isLoading };
+  return { file, handleFileChange, status, isLoading, uploadFile };
 };
 
 export default useFileUpload;

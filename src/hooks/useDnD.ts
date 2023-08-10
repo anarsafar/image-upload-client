@@ -1,14 +1,13 @@
 import { useDrop } from 'react-dnd';
 import { NativeTypes } from 'react-dnd-html5-backend';
-import useFileUpload from './useFileUpload';
 
 interface DraggedFileItem {
   files: FileList;
 }
 
-const useDnD = () => {
-  const { handleFileChange } = useFileUpload();
-
+const useDnD = (
+  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: [NativeTypes.FILE],
     drop: (item: DraggedFileItem, monitor) => {

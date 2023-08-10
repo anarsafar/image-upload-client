@@ -1,12 +1,20 @@
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Text, useClipboard } from '@chakra-ui/react';
 import UploadContainer from './UploadContainer';
 import success from '../assets/success.svg';
 
+type Status = {
+  message?: string;
+  error?: string;
+  url?: string;
+};
 interface ResultProp {
   file: File | null;
+  status: Status;
 }
 
-function Result({ file }: ResultProp): JSX.Element {
+function Result({ file, status }: ResultProp): JSX.Element {
+  const { onCopy, hasCopied } = useClipboard(status.url || '');
+
   return (
     <UploadContainer>
       <Box mb="7.5px">
@@ -40,8 +48,12 @@ function Result({ file }: ResultProp): JSX.Element {
           letterSpacing="-0.28px"
           color="#4F4F4F"
           px="5px"
+          textOverflow="ellipsis"
+          whiteSpace="nowrap"
+          overflow="hidden"
+          width="70%"
         >
-          link...
+          {status?.url}
         </Text>
         <Button
           borderRadius="8px"
@@ -52,8 +64,9 @@ function Result({ file }: ResultProp): JSX.Element {
           fontWeight="500"
           lineHeight="normal"
           letterSpacing="-0.28px"
+          onClick={onCopy}
         >
-          Copy Link
+          {hasCopied ? 'Copied!' : 'Copy Link'}
         </Button>
       </Flex>
     </UploadContainer>

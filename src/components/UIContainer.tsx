@@ -6,12 +6,12 @@ import Result from './Result';
 import Upload from './Upload';
 
 function UIContainer(): JSX.Element {
-  const { handleFileChange, isLoading, status } = useFileUpload();
+  const { handleFileChange, isLoading, status, file } = useFileUpload();
   const { fileInputRef, handleButtonClick } = useCustomRef();
   const { drop, borderStyle } = useDnD(handleFileChange);
 
   if (isLoading) return <Loading />;
-  if (status.message) return <Result />;
+  if (status.message) return <Result file={file} />;
 
   return (
     <Upload

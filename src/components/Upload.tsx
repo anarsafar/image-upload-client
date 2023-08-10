@@ -1,22 +1,23 @@
 import { Button, Flex, FormLabel, Image, Input, Text } from '@chakra-ui/react';
-
+import { ConnectDropTarget } from 'react-dnd';
 import dnd from '../assets/dnd.svg';
-import useFileUpload from '../hooks/useFileUpload';
-import useCustomRef from '../hooks/useCustomRef';
-import useDnD from '../hooks/useDnD';
 import UploadContainer from './UploadContainer';
 
-function Upload(): JSX.Element {
-  const { handleFileChange, status, isLoading, file } = useFileUpload();
-  const { fileInputRef, handleButtonClick } = useCustomRef();
-  const { drop, borderStyle } = useDnD(handleFileChange);
+interface Props {
+  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleButtonClick: () => void;
+  borderStyle: string;
+  drop: ConnectDropTarget;
+  fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
+}
 
-  console.group('test');
-  console.log('Status ', status);
-  console.log('loading ', isLoading);
-  console.log('file ', file);
-  console.groupEnd();
-
+function Upload({
+  handleFileChange,
+  fileInputRef,
+  handleButtonClick,
+  drop,
+  borderStyle,
+}: Props): JSX.Element {
   return (
     <UploadContainer>
       <Text

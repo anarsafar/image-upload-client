@@ -1,7 +1,7 @@
-import Upload from './components/Upload';
+import UIContainer from './components/UIContainer';
 
 function App() {
-  return <Upload />;
+  return <UIContainer />;
 }
 
 export default App;

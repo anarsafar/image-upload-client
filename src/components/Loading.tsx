@@ -13,7 +13,13 @@ function Loading(): JSX.Element {
       >
         Uploading...
       </Text>
-      <Progress mt="30px" size="sm" borderRadius="8px" isIndeterminate />
+      <Progress
+        width="100%"
+        mt="30px"
+        size="sm"
+        borderRadius="8px"
+        isIndeterminate
+      />
     </UploadContainer>
   );
 }
